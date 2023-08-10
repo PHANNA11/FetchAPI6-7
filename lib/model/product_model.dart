@@ -57,7 +57,7 @@ class ProductModel {
 
 class Category {
   int id;
-  Name name;
+  String? name;
   String image;
   DateTime creationAt;
   DateTime updatedAt;
@@ -72,7 +72,7 @@ class Category {
 
   factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
-        name: nameValues.map[json["name"]]!,
+        name: json["name"],
         image: json["image"],
         creationAt: DateTime.parse(json["creationAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -80,41 +80,9 @@ class Category {
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "name": nameValues.reverse[name],
+        "name": [name],
         "image": image,
         "creationAt": creationAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
       };
-}
-
-enum Name {
-  CHANGE_TITLE,
-  ELECTRONICS,
-  NUEVO_NOMBRE,
-  OTHERS_2,
-  SHOES,
-  SISTEMA_SOLAR,
-  UN_NUEVO_NOMBRE
-}
-
-final nameValues = EnumValues({
-  "Change title": Name.CHANGE_TITLE,
-  "Electronics": Name.ELECTRONICS,
-  "Nuevo nombre": Name.NUEVO_NOMBRE,
-  "Others 2": Name.OTHERS_2,
-  "Shoes": Name.SHOES,
-  "Sistema Solar": Name.SISTEMA_SOLAR,
-  "un nuevo nombre": Name.UN_NUEVO_NOMBRE
-});
-
-class EnumValues<T> {
-  Map<String, T> map;
-  late Map<T, String> reverseMap;
-
-  EnumValues(this.map);
-
-  Map<T, String> get reverse {
-    reverseMap = map.map((k, v) => MapEntry(v, k));
-    return reverseMap;
-  }
 }
